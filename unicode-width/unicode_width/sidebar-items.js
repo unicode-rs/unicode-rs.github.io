@@ -1,1 +1,0 @@
-initSidebarItems({"trait":[["UnicodeWidthChar","Methods for determining displayed width of Unicode characters."],["UnicodeWidthStr","Methods for determining displayed width of Unicode strings."]],"constant":[["UNICODE_VERSION","The version of Unicode that this version of unicode_charwidth is based on."]]});
