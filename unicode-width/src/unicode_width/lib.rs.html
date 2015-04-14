@@ -187,6 +187,36 @@
 <span id="145">145</span>
 <span id="146">146</span>
 <span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -224,7 +254,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
 <span class='doccomment'>//! [dependencies]</span>
-<span class='doccomment'>//! unicode_width = &quot;0.0.1&quot;</span>
+<span class='doccomment'>//! unicode-width = &quot;0.0.1&quot;</span>
 <span class='doccomment'>//! ```</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>, <span class='ident'>unsafe_code</span>)]</span>
@@ -333,6 +363,36 @@
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\x01&#39;</span>.<span class='ident'>width_cjk</span>(), <span class='prelude-val'>None</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\u{2081}&#39;</span>), <span class='prelude-val'>Some</span>(<span class='number'>1</span>));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\u{2081}&#39;</span>.<span class='ident'>width_cjk</span>(), <span class='prelude-val'>Some</span>(<span class='number'>2</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_char2</span>() {
+        <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>UnicodeWidthChar</span>;
+        <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::{<span class='prelude-val'>Some</span>, <span class='prelude-val'>None</span>};
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\x00&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\x00&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\x0A&#39;</span>),<span class='prelude-val'>None</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\x0A&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>None</span>);
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;w&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;w&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;ｈ&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>2</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;ｈ&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>2</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\u{AD}&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\u{AD}&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\u{1160}&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\u{1160}&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\u{a1}&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\u{a1}&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>2</span>));
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>UnicodeWidthChar</span>::<span class='ident'>width</span>(<span class='string'>&#39;\u{300}&#39;</span>),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;\u{300}&#39;</span>.<span class='ident'>width_cjk</span>(),<span class='prelude-val'>Some</span>(<span class='number'>0</span>));
     }
 }
 </pre>
